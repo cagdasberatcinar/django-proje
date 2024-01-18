@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+<!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css"
+  rel="stylesheet"
+/>
+    <title>Document</title>
+</head>
+<body>
+    {% include 'partials/_navbar.html' %}
+    <div class="container">
+        <div class="row my-4">
+          <h2>Blog Kategorileri</h2>
+          <hr>
+          <div class="col-9 d-flex gap-3 mb-3">
+            {% for i in category_list %}
+            <a class="card p-2  shadow-3-strong" href="/bloglar/{{ i.slug }}">{{ i.title }}</a>
+            {% endfor %}
+          </div>
+          <!-- Search Kısmı -->
+          <div class="col">
+            <form class="d-flex" method="GET">
+              <input type="search" class="form-control" name="query" id="" placeholder="Ara">
+              <button class="btn btn-secondary" type="submit" style="margin-left: -25px;">Ara</button>
+            </form>
+          </div>
+          <hr>
+          
+          {% for i in blog_list  %}
+          <div class="col-12">
+            <div class="card mb-3" style="height: 200px;">
+              <div class="row g-0 h-100">
+                <div class="col-md-4 h-100">
+                  <a href="/blog/{{ i.id }}">
+                    <img
+                    src="{{ i.image.url }}"
+                    alt="Trendy Pants and Shoes"
+                    class="img-fluid rounded-start h-100 w-100"
+                    style="object-fit: cover;"
+                  />
+                  </a>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <a href="/blog/{{i.slug}}">
+                      <h5 class="card-title">{{i.title}}</h5>
+                    </a>
+                    <p class="card-text">
+                      {{i.text |truncatechars:'150' }}
+                    </p>
+                    <p class="card-text">
+                      <small class="text-muted">{{i.date_now}}</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+              
+          {% endfor %}
+              
+        </div>
+      </div>
+
+    {% include 'partials/_footer.html' %}
+<script>
+    // Initialization for ES Users
+import { Dropdown, Collapse, initMDB } from "mdb-ui-kit";
+
+initMDB({ Dropdown, Collapse });
+
+  </script>
+  <!-- MDB -->
+<script
+type="text/javascript"
+src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"
+></script>
+</body>
+</html>
+
